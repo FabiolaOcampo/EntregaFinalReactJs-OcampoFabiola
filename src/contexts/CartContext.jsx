@@ -7,13 +7,19 @@ export const CartProvider = ({children}) => {
 
     const clear = () => setItems([]);
 
-    const onAdd = (item) => setItems (prev => {
+    const onAdd = (item) => 
+    setItems ((prev) => {
         return [...prev, item];
     });
 
-    console.log(items);
+    
 
 
-    return ( <CartContext.Provider value={{items, clear, onAdd}} > {children}</CartContext.Provider>
+
+
+return ( 
+    <CartContext.Provider value={{items, clear, onAdd}} > 
+      {children}
+    </CartContext.Provider>
     );
 };
