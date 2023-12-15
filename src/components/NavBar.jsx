@@ -12,9 +12,10 @@ export const NavBar = () => {
           <Navbar.Brand >
            <NavLink to="/">Inicio</NavLink>
           </Navbar.Brand>
-          <Nav className="me-auto">
-            <NavLink to="category/anteojos">Anteojos</NavLink>
-            <NavLink to="category/autos">Autos</NavLink>
+          <Nav className="me-auto" >
+            <NavLink style={{margin:"5px"}} to="category/Tazas">Tazas</NavLink>
+      
+            <NavLink style={{margin:"5px"}} to="category/Platos">Platos</NavLink>
             
           </Nav>
           <CartWidget/>

@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react'; 
-import Container from 'react-bootstrap/Container';
+import {Container} from 'react-bootstrap/Container';
+import { getFirestore, getDoc, doc } from "firebase/firestore";
 
 import { ItemDetail } from './ItemDetail';
-import { products } from '../data/products';
+
 
 
 export const ItemsDetailContainer = () => {
@@ -12,24 +13,23 @@ export const ItemsDetailContainer = () => {
     const { id } = useParams();
 
 
+   
 useEffect(() => {
-    const mypromise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(products);
-        }, 2000);
-    });
-
-    mypromise.then((response) => {
-         const findById = response.find((item) => item.id === Number(id));
-        setItem(findById); 
-    });
-}, [id]);
+          const db = getFirestore();
+      
+          const refDoc = doc(db, "items", id);
+      
+          getDoc(refDoc).then((snapshot) => {
+            setItem({ id: snapshot.id, ...snapshot.data() });
+          });
+        }, [id]);
 
 
 
-    return (
+        return (
     <Container className='mt-4'>
-        {item ? <ItemDetail item= {item}/> : <>Loading...</> }
+        {item ? <ItemDetail item= {item}/> : <> Loading...</> }
         </Container>
-        );
-};
+        )
+
+    };
